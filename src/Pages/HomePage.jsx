@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <main>
       <div className="hero">
-        <section class="hero-content">
+        <section className="hero-content">
           <h2 className="sr-only">Promoted Content</h2>
           <p className="subtitle">No fees.</p>
           <p className="subtitle">No minimum deposit.</p>
@@ -17,7 +17,7 @@ export default function HomePage() {
       <section className="features">
         <h2 className="sr-only">Features</h2>
         <div className="feature-item">
-          <img src={iconChat} alt="Chat Icon" class="feature-icon" />
+          <img src={iconChat} alt="Chat Icon" className="feature-icon" />
           <h3 className="feature-item-title">You are our #1 priority</h3>
           <p>
             Need to talk to a representative? You can get in touch through our
