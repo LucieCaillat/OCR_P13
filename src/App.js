@@ -1,3 +1,9 @@
+import Header from "./components/Header";
+
 export default function App() {
-  return <div>coucou</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
