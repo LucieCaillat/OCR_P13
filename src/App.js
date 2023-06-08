@@ -11,8 +11,8 @@ export default function App() {
     <React.Fragment>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="sign-in" element={<SignIn />} />
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="sign-in" element={<SignIn />} />
         <Route path="user" element={<UserPage />} />
       </Routes>
       <Footer />

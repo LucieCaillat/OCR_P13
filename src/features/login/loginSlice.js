@@ -2,14 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const { actions, reducer } = createSlice({
   name: "login",
-  initialState: "light",
+  initialState: false,
   reducers: {
-    toggle: (state) => {
-      return state === "light" ? "dark" : "light";
+    getConnect: () => {
+      return true;
+    },
+    disconnect: () => {
+      return false;
     },
   },
 });
 
-export const { toggle } = actions;
+export const { getConnect, disconnect } = actions;
 
 export default reducer;

@@ -1,32 +1,57 @@
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import * as loginAction from "../features/login/loginSlice";
 
 export default function SignIn() {
+  const [userNameValue, setUserNameValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [rememberMeValue, setRememberMeValue] = useState(false);
   const dispatch = useDispatch();
+
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
-        <i
-          className="fa fa-user-circle sign-in-icon"
-          onClick={() => {
-            dispatch(loginAction.toggle());
-          }}
-        ></i>
+        <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input
+              type="text"
+              id="username"
+              value={userNameValue}
+              onChange={(e) => setUserNameValue(e.target.value)}
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input
+              type="password"
+              id="password"
+              value={passwordValue}
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              onChange={(e) => setRememberMeValue(e.target.checked)}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button className="sign-in-button">Sign In</button>
+          <button
+            className="sign-in-button"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("Username", userNameValue);
+              console.log("Password", passwordValue);
+              console.log("R", rememberMeValue);
+              dispatch(loginAction.getConnect());
+            }}
+          >
+            Sign In
+          </button>
         </form>
       </section>
     </main>

@@ -1,6 +1,41 @@
 import argentBankLogo from "../img/argentBankLogo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as loginAction from "../features/login/loginSlice";
+
 export default function Header() {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.login);
+
+  const Connected = (
+    <div>
+      <Link class="main-nav-item" to="/user">
+        <i class="fa fa-user-circle"></i>
+        Tony
+      </Link>
+      <Link
+        class="main-nav-item"
+        to="./"
+        onClick={(e) => {
+          dispatch(loginAction.disconnect());
+        }}
+      >
+        <i class="fa fa-sign-out"></i>
+        Sign Out
+      </Link>
+    </div>
+  );
+
+  const NotConnected = (
+    <div>
+      <Link className="main-nav-item" to="./sign-in">
+        <i className="fa fa-user-circle"></i>
+        Sign In
+      </Link>
+    </div>
+  );
+
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -11,12 +46,7 @@ export default function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div>
-        <Link className="main-nav-item" to="./sign-in">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </Link>
-      </div>
+      {isLogin ? Connected : NotConnected}
     </nav>
   );
 }
