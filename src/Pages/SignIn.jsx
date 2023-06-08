@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import * as loginAction from "../features/login/loginSlice";
 
@@ -7,12 +7,16 @@ export default function SignIn() {
   const [passwordValue, setPasswordValue] = useState("");
   const [rememberMeValue, setRememberMeValue] = useState(false);
   const dispatch = useDispatch();
+  const isPending = useSelector((state) => state.login.status === "pending");
+  const error = useSelector((state) => state.login.error);
+  console.log("pending", isPending);
 
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
+        {error && <div>Une erreur est apparu: {error}</div>}
         <form>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
@@ -47,8 +51,9 @@ export default function SignIn() {
               console.log("Username", userNameValue);
               console.log("Password", passwordValue);
               console.log("R", rememberMeValue);
-              dispatch(loginAction.getConnect());
+              dispatch(loginAction.login(userNameValue, passwordValue));
             }}
+            disabled={isPending}
           >
             Sign In
           </button>
