@@ -1,17 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  status: "void",
+  data: null,
+  error: null,
+};
+
 const { actions, reducer } = createSlice({
   name: "login",
-  initialState: false,
+  initialState: initialState,
   reducers: {
-    getConnect: () => {
-      return true;
+    tokenFetching: (draft) => {
+      draft.status = "pending";
+      return;
     },
-    disconnect: () => {
-      return false;
+    getConnect: (draft) => {
+      draft.status = "connected";
+      return;
+    },
+    disconnect: (draft) => {
+      draft.status = "void";
+      return;
     },
   },
 });
+
+export function fetchToken(email, password) {
+  return async (dispatch, getState) => {
+    const status = getState().loging.status;
+    if (status === "pending") {
+      return;
+    }
+  };
+}
 
 export const { getConnect, disconnect } = actions;
 
