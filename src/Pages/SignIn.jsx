@@ -44,10 +44,8 @@ export default function SignIn() {
             className="sign-in-button"
             onClick={(e) => {
               e.preventDefault();
-              console.log("Username", userNameValue);
-              console.log("Password", passwordValue);
-              console.log("R", rememberMeValue);
-              dispatch(loginAction.getConnect());
+              console.log(rememberMeValue);
+              dispatch(loginAction.login(userNameValue, passwordValue));
             }}
           >
             Sign In
