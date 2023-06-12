@@ -47,7 +47,7 @@ export default function SignIn() {
               e.preventDefault();
               console.log(rememberMeValue);
               dispatch(
-                loginAction.login(userNameValue, passwordValue, userAction.user)
+                loginAction.login(userNameValue, passwordValue, userAction.fetchUser)
               );
             }}
           >

@@ -32,7 +32,7 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export function user() {
+export function fetchUser() {
   return async (dispatch, getState) => {
     const token = getState().login.token;
     const userStore = getState().user;
