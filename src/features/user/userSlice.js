@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   status: "void",
-  token: null,
+  data: null,
   error: null,
 };
 
 const { actions, reducer } = createSlice({
-  name: "login",
+  name: "user",
   initialState: initialState,
   reducers: {
     fetching: (draft) => {
@@ -15,13 +15,13 @@ const { actions, reducer } = createSlice({
       return;
     },
     success: (draft, action) => {
-      draft.status = "connected";
-      draft.token = action.payload;
+      draft.status = "resolved";
+      draft.data = action.payload;
       draft.error = null;
     },
     disconnect: (draft) => {
       draft.status = "void";
-      draft.token = null;
+      draft.data = null;
       draft.error = null;
       return;
     },
@@ -32,29 +32,30 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export function login(email, password, userAction) {
+export function user() {
   return async (dispatch, getState) => {
-    const loginStore = getState().login;
-    if (loginStore.status === "pending") {
+    const token = getState().login.token;
+    const userStore = getState().user;
+    if (userStore.status === "pending") {
       return;
     }
 
     dispatch(actions.fetching());
 
-    const result = await fetch("http://localhost:3001/api/v1/user/login", {
+    const result = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        'accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(""),
     }).then((result) => result.json());
     if (result.status === 200) {
-      dispatch(actions.success(result.body.token));
-      dispatch(userAction());
+      dispatch(actions.success(result.body));
     } else {
       dispatch(actions.error(result.message));
     }
-  };
+  }
 }
 
 export const { disconnect } = actions;

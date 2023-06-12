@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as loginAction from "../features/login/loginSlice";
+import * as userAction from "../features/user/userSlice";
 
 export default function SignIn() {
   const [userNameValue, setUserNameValue] = useState("");
@@ -45,7 +46,9 @@ export default function SignIn() {
             onClick={(e) => {
               e.preventDefault();
               console.log(rememberMeValue);
-              dispatch(loginAction.login(userNameValue, passwordValue));
+              dispatch(
+                loginAction.login(userNameValue, passwordValue, userAction.user)
+              );
             }}
           >
             Sign In
