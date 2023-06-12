@@ -7,12 +7,13 @@ import * as loginAction from "../features/login/loginSlice";
 export default function Header() {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.login.status) === "connected";
+  const userData = useSelector((state) => state.user.data)
 
   const Connected = (
     <div>
       <Link className="main-nav-item" to="/user">
         <i className="fa fa-user-circle"></i>
-        Tony
+        {userData.firstName}
       </Link>
       <Link
         className="main-nav-item"
