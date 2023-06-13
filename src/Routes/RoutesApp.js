@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomePage from "./Pages/HomePage";
-import SignIn from "./Pages/SignIn";
-import UserPage from "./Pages/UserPage";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import HomePage from "../features/homePage/HomePage";
+import SignIn from "../features/login/LoginPage";
+import UserPage from "../features/user/UserPage";
 import { useSelector } from "react-redux";
 
-export default function App() {
+export default function RoutesApp() {
   const isLogin = useSelector((state) => state.login.status) === "connected";
 
   return (
@@ -20,7 +20,7 @@ export default function App() {
           path="sign-in"
           element={isLogin ? <UserPage /> : <SignIn />}
         />
-        <Route path="user" element={<UserPage />} />
+        <Route path="user" element={isLogin ? <UserPage /> : <SignIn />} />
       </Routes>
       <Footer />
     </React.Fragment>

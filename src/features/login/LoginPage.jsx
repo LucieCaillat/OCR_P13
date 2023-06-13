@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import * as loginAction from "../features/login/loginSlice";
-import * as userAction from "../features/user/userSlice";
+import * as loginAction from "./loginSlice";
+import * as userAction from "../user/userSlice";
 
 export default function SignIn() {
   const [userNameValue, setUserNameValue] = useState("");
