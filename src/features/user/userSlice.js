@@ -19,7 +19,7 @@ const { actions, reducer } = createSlice({
       draft.data = action.payload;
       draft.error = null;
     },
-    disconnect: (draft) => {
+    reset: (draft) => {
       draft.status = "void";
       draft.data = null;
       draft.error = null;
@@ -58,6 +58,6 @@ export function fetchUser() {
   }
 }
 
-export const { disconnect } = actions;
+export const { reset } = actions;
 
 export default reducer;

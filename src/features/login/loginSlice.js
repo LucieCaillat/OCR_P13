@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import * as userAction from "../user/userSlice";
 
 const initialState = {
   status: "void",
@@ -19,7 +20,7 @@ const { actions, reducer } = createSlice({
       draft.token = action.payload;
       draft.error = null;
     },
-    disconnect: (draft) => {
+    reset: (draft) => {
       draft.status = "void";
       draft.token = null;
       draft.error = null;
@@ -32,7 +33,7 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export function login(email, password, userAction) {
+export function login(email, password) {
   return async (dispatch, getState) => {
     const loginStore = getState().login;
     if (loginStore.status === "pending") {
@@ -50,13 +51,20 @@ export function login(email, password, userAction) {
     }).then((result) => result.json());
     if (result.status === 200) {
       dispatch(actions.success(result.body.token));
-      dispatch(userAction());
+      dispatch(userAction.fetchUser());
     } else {
       dispatch(actions.error(result.message));
     }
   };
 }
 
-export const { disconnect } = actions;
+export function disconnect(){
+  return (dispatch, getState)=>{
+    dispatch(actions.reset())
+    dispatch(userAction.reset())
+  }
+
+}
+
 
 export default reducer;
