@@ -13,7 +13,7 @@ export default function Header() {
     <div>
       <Link className="main-nav-item" to="/user">
         <i className="fa fa-user-circle"></i>
-        {userData.firstName}
+        {userData === null? "": userData.firstName}
       </Link>
       <Link
         className="main-nav-item"

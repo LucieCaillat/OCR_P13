@@ -8,7 +8,7 @@ export default function UserPage() {
         <h1>
           Welcome back
           <br />
-          {userData.firstName + " " + userData.lastName}!
+          {userData === null? "" : userData.firstName + " " + userData.lastName}!
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
