@@ -1,7 +1,6 @@
 import argentBankLogo from "../img/argentBankLogo.png";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as loginAction from "../features/login/loginSlice";
 
 export default function Header() {

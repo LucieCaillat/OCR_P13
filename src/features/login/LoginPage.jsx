@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import * as loginAction from "./loginSlice";
 
@@ -6,6 +6,8 @@ export default function SignIn() {
   const [userNameValue, setUserNameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [rememberMeValue, setRememberMeValue] = useState(false);
+  const isPending = useSelector((state) => state.login.status === "pending");
+  const error = useSelector((state)=> state.login.error)
   const dispatch = useDispatch();
 
   return (
@@ -13,6 +15,7 @@ export default function SignIn() {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
+        {error && <div className="error-message">{error}</div>}
         <form>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
@@ -42,12 +45,11 @@ export default function SignIn() {
           </div>
           <button
             className="sign-in-button"
+            disabled={isPending}
             onClick={(e) => {
               e.preventDefault();
               console.log(rememberMeValue);
-              dispatch(
-                loginAction.login(userNameValue, passwordValue)
-              );
+              dispatch(loginAction.login(userNameValue, passwordValue));
             }}
           >
             Sign In

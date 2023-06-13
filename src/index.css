@@ -297,3 +297,8 @@ body {
     width: 200px;
   }
 }
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
