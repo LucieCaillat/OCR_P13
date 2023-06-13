@@ -20,6 +20,7 @@ export default function UserPage() {
       <h2 className="sr-only">Accounts</h2>
       {falseData.map((account) => (
         <Account
+        key={account.title}
           title={account.title}
           amount={account.amount}
           amountDescription={account.amountDescription}

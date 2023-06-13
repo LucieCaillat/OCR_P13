@@ -1,6 +1,6 @@
-export default function Account({ title, amount, amountDescription }) {
+export default function Account({ title, amount, amountDescription, light= false }) {
   return (
-    <section className="account">
+    <section className={`account ${light? "account-light": ""}`}>
       <div className="account-content-wrapper">
         <h3 className="account-title">Argent Bank {title}</h3>
         <p className="account-amount">${amount}</p>
@@ -9,7 +9,7 @@ export default function Account({ title, amount, amountDescription }) {
         </p>
       </div>
       <div className="account-content-wrapper cta">
-        <button className="transaction-button">View transactions</button>
+        <button className={`transaction-button ${light? "transaction-button-light": ""}`}>View transactions</button>
       </div>
     </section>
   );

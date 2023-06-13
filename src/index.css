@@ -25,6 +25,9 @@ body {
 .bg-dark {
   background-color: #12002b;
 }
+.bg-light {
+  background-color: #e0e6ed;
+}
 
 .sr-only {
   border: 0 !important;
@@ -301,4 +304,27 @@ body {
 .error-message {
   color: red;
   margin-bottom: 10px;
+}
+
+.color-dark{
+  color: #283845;
+}
+.account-light{
+  border: 1px solid #c3cfd9;
+}
+.transaction-button-light{
+  border-color: #6458f5;
+  background-color: #6458f5;
+}
+.update-input{
+  margin-bottom: 1rem;
+}
+.update-input input{
+  margin: 0 0.5rem 0.5rem;
+}
+.update-button{
+  margin-bottom: 2rem;
+}
+.update-button button{
+  margin: 0 0.5rem 0.5rem;
 }
