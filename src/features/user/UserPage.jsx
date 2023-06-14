@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Account from "../../components/Account";
 import { falseData } from "../../components/Account";
+import { Link } from "react-router-dom";
 
 export default function UserPage() {
   const userData = useSelector((state) => state.user.data);
@@ -15,17 +16,19 @@ export default function UserPage() {
             : userData.firstName + " " + userData.lastName}
           !
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <Link to="/update">
+          <button className="edit-button">Edit Name</button>
+        </Link>
       </div>
       <h2 className="sr-only">Accounts</h2>
       {falseData.map((account) => (
         <Account
-        key={account.title}
+          key={account.title}
           title={account.title}
           amount={account.amount}
           amountDescription={account.amountDescription}
         />
-      ))}      
+      ))}
     </main>
   );
 }

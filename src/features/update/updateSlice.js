@@ -1,27 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import * as userAction from "../user/userSlice";
 
 const initialState = {
   status: "void",
-  data: null,
   error: null,
 };
 
 const { actions, reducer } = createSlice({
-  name: "user",
+  name: "update",
   initialState: initialState,
   reducers: {
     fetching: (draft) => {
       draft.status = "pending";
       return;
     },
-    success: (draft, action) => {
-      draft.status = "resolved";
-      draft.data = action.payload;
+    success: (draft) => {
+      draft.status = "success";
       draft.error = null;
     },
     reset: (draft) => {
       draft.status = "void";
-      draft.data = null;
       draft.error = null;
       return;
     },
@@ -35,7 +33,7 @@ const { actions, reducer } = createSlice({
 export default reducer;
 export const { reset } = actions;
 
-export function fetchUser() {
+export function update(firstName, lastName) {
   return async (dispatch, getState) => {
     const token = getState().login.token;
     const userStore = getState().user;
@@ -46,15 +44,16 @@ export function fetchUser() {
     dispatch(actions.fetching());
 
     const result = await fetch("http://localhost:3001/api/v1/user/profile", {
-      method: "POST",
+      method: "PUT",
       headers: {
         accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(""),
+      body: JSON.stringify({ firstName, lastName }),
     }).then((result) => result.json());
     if (result.status === 200) {
-      dispatch(actions.success(result.body));
+      dispatch(userAction.fetchUser());
+      dispatch(actions.success());
     } else {
       dispatch(actions.error(result.message));
     }
