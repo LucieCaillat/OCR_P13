@@ -33,7 +33,7 @@ const { actions, reducer } = createSlice({
 export default reducer;
 export const { reset } = actions;
 
-export function update(firstName, lastName) {
+export function update(firstName, lastName, redirector) {
   return async (dispatch, getState) => {
     const token = getState().login.token;
     const userStore = getState().user;
@@ -54,6 +54,8 @@ export function update(firstName, lastName) {
     if (result.status === 200) {
       dispatch(userAction.fetchUser());
       dispatch(actions.success());
+      // it is possible by pass useNavigate hook from component when dispatch action
+      redirector("/user");
     } else {
       dispatch(actions.error(result.message));
     }
