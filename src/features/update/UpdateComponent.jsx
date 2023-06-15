@@ -2,9 +2,14 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import * as updateAction from "./updateSlice";
+import { Navigate } from "react-router-dom";
 
 export default function UpdateComponent() {
   const userData = useSelector((state) => state.user.data);
+  const isSuccessUpdate = useSelector(
+    (state) => state.update.status === "success"
+  );
+  const isConnected = useSelector((state) => state.user.status === "resolved");
   const [firstNameValue, setFirstNameValue] = useState(
     userData === null ? "" : userData.firstName
   );
@@ -12,6 +17,13 @@ export default function UpdateComponent() {
     userData === null ? "" : userData.lastName
   );
   const dispatch = useDispatch();
+
+  if (isSuccessUpdate) {
+    return <Navigate to="/user" replace={true} />;
+  }
+  if (!isConnected) {
+    return <Navigate to="/sign-in" replace={true} />;
+  }
 
   return (
     <form>
@@ -32,17 +44,14 @@ export default function UpdateComponent() {
         />
       </div>
       <div className="update-button">
-        <Link to="/user">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              console.log(firstNameValue, lastNameValue);
-              dispatch(updateAction.update(firstNameValue, lastNameValue));
-            }}
-          >
-            Save
-          </button>
-        </Link>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(updateAction.update(firstNameValue, lastNameValue));
+          }}
+        >
+          Save
+        </button>
 
         <Link to="/user">
           <button>Cancel</button>

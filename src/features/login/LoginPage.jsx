@@ -1,14 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import * as loginAction from "./loginSlice";
+import { Navigate } from "react-router-dom";
 
 export default function SignIn() {
   const [userNameValue, setUserNameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [rememberMeValue, setRememberMeValue] = useState(false);
+  const isConnected= useSelector((state)=> state.user.status === "resolved")
   const isPending = useSelector((state) => state.login.status === "pending");
   const error = useSelector((state)=> state.login.error)
   const dispatch = useDispatch();
+
+  if(isConnected){
+    return<Navigate to="/user" replace={true} />
+  }
 
   return (
     <main className="main bg-dark">
