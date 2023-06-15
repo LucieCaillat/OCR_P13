@@ -22,7 +22,7 @@ export default function RoutesApp() {
           element={isLogin ? <UserPage /> : <SignIn />}
         />
         <Route path="user" element={isLogin ? <UserPage /> : <SignIn />} />
-        <Route path="update" element={ <UpdatePage />}/>} />
+        <Route path="update" element={<UpdatePage />} />
       </Routes>
       <Footer />
     </React.Fragment>

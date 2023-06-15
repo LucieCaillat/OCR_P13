@@ -46,7 +46,7 @@ export function update(firstName, lastName) {
     const result = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "PUT",
       headers: {
-        accept: "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ firstName, lastName }),

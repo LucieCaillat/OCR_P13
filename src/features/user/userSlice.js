@@ -48,10 +48,9 @@ export function fetchUser() {
     const result = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "POST",
       headers: {
-        accept: "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(""),
     }).then((result) => result.json());
     if (result.status === 200) {
       dispatch(actions.success(result.body));

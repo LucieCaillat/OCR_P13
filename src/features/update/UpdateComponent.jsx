@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import * as updateAction from "./updateSlice";
 
 export default function UpdateComponent() {
-  const [firstNameValue, setFirstNameValue] = useState("");
-  const [lastNameValue, setLastNameValue] = useState("");
   const userData = useSelector((state) => state.user.data);
+  const [firstNameValue, setFirstNameValue] = useState(
+    userData === null ? "" : userData.firstName
+  );
+  const [lastNameValue, setLastNameValue] = useState(
+    userData === null ? "" : userData.lastName
+  );
   const dispatch = useDispatch();
 
   return (
