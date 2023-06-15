@@ -310,7 +310,7 @@ body {
   color: #283845;
 }
 .account-light{
-  border: 1px solid #c3cfd9;
+  border: 2px solid #c3cfd9;
 }
 .transaction-button-light{
   border-color: #6458f5;
@@ -321,10 +321,21 @@ body {
 }
 .update-input input{
   margin: 0 0.5rem 0.5rem;
+  padding: 5px;
+  font-size: 1.2rem;
+  border: 2px solid #c3cfd9;
+  width: 15rem;
 }
 .update-button{
   margin-bottom: 2rem;
 }
 .update-button button{
   margin: 0 0.5rem 0.5rem;
+  width: 9rem;
+  padding: 5px;
+  font-size: 1.2rem;
+  border: 2px solid #b3b3f0;
+  color: #6458f5;
+  font-weight: bold;
+  background-color: white;
 }
