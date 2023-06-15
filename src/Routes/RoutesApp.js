@@ -6,12 +6,13 @@ import HomePage from "../features/homePage/HomePage";
 import SignIn from "../features/login/LoginPage";
 import UserPage from "../features/user/UserPage";
 import UpdatePage from "../features/update/UpdatePage";
+import history from "../history";
 
 export default function RoutesApp() {
   return (
     <React.Fragment>
       <Header />
-      <Routes>
+      <Routes history={history}>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="sign-in" element={<SignIn />} />
         <Route path="user" element={<UserPage />} />
