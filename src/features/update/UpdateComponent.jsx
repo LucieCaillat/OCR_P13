@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as updateAction from "./updateSlice";
 import { Navigate } from "react-router-dom";
 
 export default function UpdateComponent() {
+  const redirector = useNavigate();
   const userData = useSelector((state) => state.user.data);
-  const isSuccessUpdate = useSelector(
-    (state) => state.update.status === "success"
-  );
   const isConnected = useSelector((state) => state.user.status === "resolved");
   const [firstNameValue, setFirstNameValue] = useState(
     userData === null ? "" : userData.firstName
@@ -16,11 +14,10 @@ export default function UpdateComponent() {
   const [lastNameValue, setLastNameValue] = useState(
     userData === null ? "" : userData.lastName
   );
+
   const dispatch = useDispatch();
 
-  if (isSuccessUpdate) {
-    return <Navigate to="/user" replace={true} />;
-  }
+  // yes !
   if (!isConnected) {
     return <Navigate to="/sign-in" replace={true} />;
   }
@@ -47,7 +44,9 @@ export default function UpdateComponent() {
         <button
           onClick={(e) => {
             e.preventDefault();
-            dispatch(updateAction.update(firstNameValue, lastNameValue));
+            dispatch(
+              updateAction.update(firstNameValue, lastNameValue, redirector)
+            );
           }}
         >
           Save
