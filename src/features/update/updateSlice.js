@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as userAction from "../user/userSlice";
+import history from "../../history";
 
 const initialState = {
   status: "void",
@@ -54,6 +55,7 @@ export function update(firstName, lastName) {
     if (result.status === 200) {
       dispatch(userAction.fetchUser());
       dispatch(actions.success());
+      history.push("/user");
     } else {
       dispatch(actions.error(result.message));
     }
