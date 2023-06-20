@@ -1,4 +1,4 @@
-# Project 13 - Front-end Dashboard
+# Project 13 - Front-end Argent Bank
 
 This repo contains the front-end for the Argent bank app .
 To work, it must use the micro API found on this repo https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
